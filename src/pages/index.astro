@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<Layout title="Kirbey García | Software Engineer">
+	<Header />
+	<main>
+		<Hero />
+		<Experience />
+		<Projects />
+		<Contact />
+	</main>
+	<footer class="footer">
+		<div class="container">
+			<p>&copy; {new Date().getFullYear()} Kirbey García. All rights reserved.</p>
+		</div>
+	</footer>
+</Layout>
+
+<style>
+	.footer {
+		text-align: center;
+		padding: 2rem 0;
+		color: var(--text-secondary);
+		border-top: 1px solid var(--card-border);
+		margin-top: 4rem;
+	}
+</style>

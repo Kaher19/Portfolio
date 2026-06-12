@@ -1,0 +1,80 @@
+---
+---
+<section class="hero" id="about">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Hi, I'm Kirbey García<br />
+        <span class="text-gradient">Software Engineer</span>
+      </h1>
+      <p class="hero-subtitle">
+        I build elegant, scalable, and high-performance applications. Passionate about creating exceptional user experiences and solving complex problems.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 70px; /* Offset for fixed header */
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative background element */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(10, 10, 10, 0) 70%);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .hero-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 5rem);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-inline: auto;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    .hero-actions {
+      flex-direction: column;
+    }
+  }
+</style>

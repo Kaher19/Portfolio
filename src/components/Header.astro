@@ -1,0 +1,73 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+<header class="header">
+  <div class="container nav-container">
+    <a href="/" class="logo"><span class="prelogo">portfolio.</span>Kaher<span class="text-gradient">.dev</span></a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <ThemeToggle />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .prelogo {
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none; /* Hide on mobile for basic template */
+    }
+  }
+</style>

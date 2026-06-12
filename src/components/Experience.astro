@@ -1,0 +1,250 @@
+---
+const experiences = [
+  {
+    role: "Software engineer",
+    company: "Capi Software",
+    type: "Jornada completa",
+    date: "Sept. 2022 - Actualidad",
+    duration: "3 años 10 meses",
+    location: "Mérida, Yucatán, México",
+    description: "",
+    tags: ["Lado del servidor", "Resolución de problemas", "+7 aptitudes"]
+  },
+  {
+    role: "Software engineer junior",
+    company: "Contraloría General del Estado",
+    type: "Jornada completa",
+    date: "Oct. 2021 - Sept. 2022",
+    duration: "1 año",
+    location: "Mérida, Yucatán, México",
+    description: "",
+    tags: ["Lado del servidor", "TypeScript", "+7 aptitudes"]
+  },
+  {
+    role: "Software engineer junior",
+    company: "Gobierno municipal",
+    type: "Profesional independiente",
+    date: "Abr. 2021 - Ago. 2021",
+    duration: "5 meses",
+    location: "Mérida, Yucatán, México",
+    description: "Elaboración de un software de administración de inventarios y recursos usando Springboot, Bootstrap y Angular, desde la concepción del diseño (incluido el diseño de la base de datos MySQL) hasta el despliegue en un servidor Linux local.",
+    tags: ["Lado del servidor", "TypeScript", "+5 aptitudes"]
+  },
+  {
+    role: "Coder",
+    company: "3GAR",
+    type: "Autónomo",
+    date: "Feb. 2020 - Sept. 2020",
+    duration: "8 meses",
+    location: "Mérida, Yucatán, México",
+    description: "Participé en la elaboración de una aplicación web para la administración de las funciones operacionales de la empresa. Los modulos en los que participé fueron referentes a la administración de los trabajadores y cuentas de usuario así como la administración del inventario que poseen tanto de materiales que usaban como las herramientas que utilizan.",
+    tags: ["Programación"]
+  },
+  {
+    role: "Coder",
+    company: "TxRx Comunicaciones",
+    type: "Jornada parcial",
+    date: "May. 2019 - Ago. 2019",
+    duration: "4 meses",
+    location: "Mérida, Yucatán, México",
+    description: "Trabajé en el desarrollo de una página web que se encargaba de la representación de áreas utilizando coordenadas sobre un mapa.",
+    tags: []
+  }
+];
+---
+<section id="experience" class="experience">
+  <div class="container">
+    <h2 class="section-title">Professional experience</h2>
+    <div class="timeline">
+      {experiences.map((exp) => (
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3 class="role">{exp.role}</h3>
+            <div class="company-info">
+              <span class="company">{exp.company}</span>
+              <span class="separator">•</span>
+              <span class="type">{exp.type}</span>
+            </div>
+            <div class="meta-info">
+              <span class="date">{exp.date} <span class="duration">({exp.duration})</span></span>
+              <span class="separator hide-mobile">•</span>
+              <span class="location">{exp.location}</span>
+            </div>
+            {exp.description && <p class="description">{exp.description}</p>}
+            {exp.tags && exp.tags.length > 0 && (
+              <div class="tags">
+                {exp.tags.map(tag => <span class="tag">{tag}</span>)}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background-color: var(--bg-color); /* Match background */
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 19px; /* center of the 40px dot container */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--card-border);
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: relative;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 2px solid var(--accent-color);
+    box-shadow: 0 0 0 4px var(--bg-color);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .timeline-dot::after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent-color);
+  }
+
+  .timeline-content {
+    flex-grow: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 2rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .timeline-content:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-color);
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.15);
+  }
+
+  .role {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .company-info {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .meta-info {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .duration {
+    opacity: 0.8;
+  }
+
+  .separator {
+    color: var(--card-border);
+  }
+
+  .description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--accent-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .timeline::before {
+      left: 15px;
+    }
+    
+    .timeline-dot {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .timeline-dot::after {
+      width: 8px;
+      height: 8px;
+    }
+
+    .timeline-item {
+      gap: 1rem;
+    }
+
+    .timeline-content {
+      padding: 1.5rem;
+    }
+
+    .hide-mobile {
+      display: none;
+    }
+
+    .meta-info {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.25rem;
+    }
+  }
+</style>
