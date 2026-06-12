@@ -1,16 +1,43 @@
 ---
 import '../styles/global.css';
+import { defineConfig } from 'astro/config';
+import { ui, defaultLang } from '../i18n/ui';
 
 interface Props {
   title: string;
   description?: string;
 }
 
+defineConfig({
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false, // 'en' no llevará prefijo (/, /about), 'es' sí (/en, /en/about)
+    }
+  }
+});
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'es' } },
+  ];
+}
+
+export function useTranslations(lang: keyof typeof ui) {
+  return function t(key: keyof typeof ui[typeof defaultLang]) {
+    return ui[lang][key] || ui[defaultLang][key];
+  }
+}
+
 const { title, description = "Software Engineer Portfolio" } = Astro.props;
+const { lang } = Astro.params;
+const t = useTranslations(lang as 'en' | 'es');
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="{Astro.currentLocale}">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />

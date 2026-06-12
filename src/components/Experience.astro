@@ -100,12 +100,15 @@ const experiences = [
     max-width: 800px;
     margin: 0 auto;
     padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .timeline::before {
     content: '';
     position: absolute;
-    left: 19px; /* center of the 40px dot container */
+    left: 50%;
+    transform: translateX(-50%);
     top: 0;
     bottom: 0;
     width: 2px;
@@ -114,17 +117,41 @@ const experiences = [
 
   .timeline-item {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 0;
     position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
   }
 
-  .timeline-item:last-child {
-    margin-bottom: 0;
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .timeline-item:not(:first-child) {
+    margin-top: -100px;
+  }
+
+  .timeline-item:nth-child(odd) {
+    justify-content: flex-start;
+    --accent-bg: rgba(99, 102, 241, 0.1);
+    --accent-shadow: rgba(99, 102, 241, 0.15);
+  }
+
+  .timeline-item:nth-child(even) {
+    --accent-color: #6F31ED;
+    --accent-bg: rgba(59, 130, 246, 0.1);
+    --accent-shadow: rgba(59, 130, 246, 0.15);
   }
 
   .timeline-dot {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
     flex-shrink: 0;
     width: 40px;
     height: 40px;
@@ -147,7 +174,7 @@ const experiences = [
   }
 
   .timeline-content {
-    flex-grow: 1;
+    width: calc(50% - 40px);
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 2rem;
@@ -158,7 +185,7 @@ const experiences = [
   .timeline-content:hover {
     transform: translateY(-3px);
     border-color: var(--accent-color);
-    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.15);
+    box-shadow: 0 10px 30px -10px var(--accent-shadow);
   }
 
   .role {
@@ -206,7 +233,7 @@ const experiences = [
   }
 
   .tag {
-    background: rgba(99, 102, 241, 0.1);
+    background: var(--accent-bg);
     color: var(--accent-color);
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -214,12 +241,28 @@ const experiences = [
     font-weight: 600;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .timeline::before {
       left: 15px;
+      transform: none;
+    }
+    
+    .timeline-item {
+      justify-content: flex-end;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:not(:first-child) {
+      margin-top: 0;
+    }
+
+    .timeline-item:nth-child(odd) {
+      justify-content: flex-end;
     }
     
     .timeline-dot {
+      left: 0;
+      transform: none;
       width: 30px;
       height: 30px;
     }
@@ -229,11 +272,8 @@ const experiences = [
       height: 8px;
     }
 
-    .timeline-item {
-      gap: 1rem;
-    }
-
     .timeline-content {
+      width: calc(100% - 50px);
       padding: 1.5rem;
     }
 
@@ -248,3 +288,25 @@ const experiences = [
     }
   }
 </style>
+
+<script>
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    observer.observe(item);
+  });
+</script>
