@@ -31,7 +31,7 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
-const { title, description = "Software Engineer Portfolio" } = Astro.props;
+const { title, description = "Software Engineer Kirbey Garcia's portfolio" } = Astro.props;
 const { lang } = Astro.params;
 const t = useTranslations(lang as 'en' | 'es');
 ---
